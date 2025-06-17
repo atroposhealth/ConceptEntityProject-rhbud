@@ -55,17 +55,9 @@ Note: This project uses the modern `docker compose` command syntax (with a space
 
 ## Initial Setup
 
-1. Create the required data directories in your Windows user profile:
-   ```powershell
-   # Create DOCKER_DATA structure
-   mkdir -Force $env:USERPROFILE\DOCKER_DATA\mongodb
-   mkdir -Force $env:USERPROFILE\DOCKER_DATA\ollama
+1. Folders handled in docker
 
-   # Create pipeline_datalake directory
-   mkdir -Force $env:USERPROFILE\pipeline_datalake
-   ```
-
-2. Create a `.docker_pipeline.env` file in your Windows user profile directory (`%USERPROFILE%`) with the following content:
+2. Create a `.env` file in your project root.
    ```bash
    # MongoDB Configuration
    MONGO_INITDB_ROOT_USERNAME=any_username
@@ -82,7 +74,6 @@ Note: This project uses the modern `docker compose` command syntax (with a space
    HUGGINGFACE_KEY=your_huggingface_key_here
    ```
 
-   Note: The `.docker_pipeline.env` file should be created in your Windows user profile directory (`%USERPROFILE%\.docker_pipeline.env`), not in the repository.
 
 ## Project Structure
 ```

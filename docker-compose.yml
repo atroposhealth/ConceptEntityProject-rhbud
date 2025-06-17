@@ -9,10 +9,10 @@ services:
     ports:
       - "27018:27017"
     volumes:
-      - ${USERPROFILE}/DOCKER_DATA/mongodb:/data/db
-      - ${USERPROFILE}/pipeline_datalake:/pipeline_datalake
+      - ./DOCKER_DATA/mongodb:/data/db
+      - ./pipeline_datalake:/pipeline_datalake
     env_file:
-      - ${USERPROFILE}/.docker_pipeline.env
+      - ./.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
@@ -27,9 +27,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ${USERPROFILE}/pipeline_datalake:/pipeline_datalake
+      - ./pipeline_datalake:/pipeline_datalake
     env_file:
-      - ${USERPROFILE}/.docker_pipeline.env
+      - ./.env
     depends_on:
       - mongodb
     networks:
@@ -41,8 +41,8 @@ services:
     ports:
       - "11434:11434"
     volumes:
-      - ${USERPROFILE}/DOCKER_DATA/ollama:/root/.ollama
-      - ${USERPROFILE}/pipeline_datalake:/pipeline_datalake
+      - ./DOCKER_DATA/ollama:/root/.ollama
+      - ./pipeline_datalake:/pipeline_datalake
     deploy:
       resources:
         limits:
@@ -72,10 +72,10 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ${USERPROFILE}/pipeline_datalake:/pipeline_datalake
+      - ./pipeline_datalake:/pipeline_datalake
       - ./notebooks:/app/notebooks
     env_file:
-      - ${USERPROFILE}/.docker_pipeline.env
+      - ./.env
     environment:
       - JUPYTER_TOKEN=develop
       - OLLAMA_HOST=http://ollama:11434
@@ -86,3 +86,8 @@ services:
 networks:
   concept-network:
     driver: bridge
+
+volumes:
+  mongodb_data:
+  ollama_data:
+  pipeline_datalake:
